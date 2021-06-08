@@ -163,8 +163,8 @@ def fitting(filename,custom_a,custom_w):
     fig.set_size_inches((27, 15), forward=False)
 
     # save figure 옵션
-    custom_ans = str(custom_a)
-    if custom_ans == 'T':
+
+    if custom_a == 1:
         if not os.path.exists('.\\res\\figure'):
             os.makedirs('.\\res\\figure')
         if not os.path.exists('.\\res\\figure\\{}'.format(filename.split('\\')[2])):
@@ -175,16 +175,10 @@ def fitting(filename,custom_a,custom_w):
             os.makedirs('.\\res\\figure\\{}\\{}\\{}'.format(filename.split('\\')[2], filename.split('\\')[3], filename.split('\\')[4]))
         plt.savefig('.\\res\\figure\\{}\\{}\\{}\\{}.png'.format(filename.split('\\')[2], filename.split('\\')[3], filename.split('\\')[4], fname))
 
-    # 저장안하고 Show만 했을경우 파일 없다고 에러나서 씀
-    try:
-        if result1.rsquared < 0.95: #없애버림 ㅋㅅㅋ
-            os.remove('.\\res\\figure\\{}\\{}\\{}\\{}.png'.format(filename.split('\\')[2], filename.split('\\')[3], filename.split('\\')[4], fname))
-    except:FileNotFoundError
-
 
     # show figure 옵션
-    custom_want = str(custom_w)
-    if custom_want == 'T':
+
+    if custom_w == 1:
         plt.show()
     
 
@@ -265,7 +259,7 @@ def csv_mod(filename,custom_csv):
     df.loc[0] = [Lot, Wafer, Mask, TestSite, Name, Date, 'process LMZ', '0.1', 'A02', 'JoohanBae,Parkseoungmin,Jeonsuin', Row, Column,
                  error_flag_list[0],
                  error_description[0], WL_list[0], Rsqref, max(refy), Rsq, IVdic[-1.0], IVdic[1.0]]
-    if custom_csv == 'T':
+    if custom_csv == 1:
         if not os.path.exists('.\\res\\csv\\Test_Result.csv'):
             os.makedirs('.\\res\\csv\\')
             df.to_csv(".\\res\\csv\\Test_Result.csv", mode='w', index=False)
